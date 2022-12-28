@@ -60,6 +60,7 @@ train_data_provider, val_data_provider = data_provider.split(split = 0.9)
 # Augment training data with random brightness, rotation and erode/dilate
 train_data_provider.augmentors = [RandomBrightness(), RandomRotate(), RandomErodeDilate()]
 
+# Creating TensorFlow model architecture
 model = train_model(
     input_dim = (configs.height, configs.width, 3),
     output_dim = len(configs.vocab),
