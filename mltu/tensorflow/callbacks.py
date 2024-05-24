@@ -1,6 +1,7 @@
 import os
 import tf2onnx
 import onnx
+from pathlib import Path
 from keras.callbacks import Callback
 
 import logging
@@ -23,7 +24,7 @@ class Model2onnx(Callback):
 
     def on_train_end(self, logs=None):
         self.model.load_weights(self.saved_model_path)
-        self.onnx_model_path = f"{os.path.splitext(self.saved_model_path)[0]}.onnx"
+        self.onnx_model_path = str(Path(self.saved_model_path).with_suffix('.onnx'))
         tf2onnx.convert.from_keras(self.model, output_path=self.onnx_model_path)
 
         if self.metadata and isinstance(self.metadata, dict):
