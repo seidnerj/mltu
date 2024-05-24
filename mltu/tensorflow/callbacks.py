@@ -14,7 +14,7 @@ class Model2onnx(Callback):
         ) -> None:
         """ Converts the model to onnx format after training is finished.
         Args:
-            saved_model_path (str): Path to the saved .h5 model.
+            saved_model_path (str): Path to the saved model.
             metadata (dict, optional): Dictionary containing metadata to be added to the onnx model. Defaults to None.
         """
         super().__init__()
@@ -23,7 +23,7 @@ class Model2onnx(Callback):
 
     def on_train_end(self, logs=None):
         self.model.load_weights(self.saved_model_path)
-        self.onnx_model_path = self.saved_model_path.replace(".h5", ".onnx")
+        self.onnx_model_path = f"{os.path.splitext(self.saved_model_path)[0]}.onnx"
         tf2onnx.convert.from_keras(self.model, output_path=self.onnx_model_path)
 
         if self.metadata and isinstance(self.metadata, dict):
