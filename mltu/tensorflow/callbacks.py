@@ -39,6 +39,7 @@ class Model2onnx(Callback):
         import tf2onnx
 
         # convert the model to onnx format
+        # NOTE: see here for more info https://github.com/keras-team/keras/issues/18430
         input_signature = [tf.TensorSpec(model.inputs[0].shape, model.inputs[0].dtype, name='digit')]
         tf2onnx.convert.from_keras(model, input_signature=input_signature, opset=13, output_path=onnx_model_path)
 
