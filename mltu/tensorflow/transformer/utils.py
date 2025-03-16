@@ -151,7 +151,7 @@ class CERMetric(tf.keras.metrics.Metric):
         self.cer_accumulator.assign_add(tf.reduce_sum(distance))
         
         # Increment the batch_counter by the batch size
-        self.batch_counter.assign_add(len(y_true))
+        self.batch_counter.assign_add(y_true.shape[0])
 
     def result(self):
         """ Computes and returns the metric result.
