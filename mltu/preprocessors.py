@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import matplotlib
 import logging
 
+from typing import Type
+
 from . import Image
 from mltu.annotations.audio import Audio
 
